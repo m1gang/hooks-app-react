@@ -9,6 +9,14 @@ export type TaskAction =
     | { type: 'TOGGLE_TODO', payload: number }
     | { type: 'DELETE_TODO', payload: number }
 
+export const getTasksInitialState = (): TaskState => {
+    return {
+        todos: [],
+        completed: 0,
+        pending: 0,
+        length: 0
+    }
+}
 
 interface TaskState {
     todos: Todo[];
@@ -16,7 +24,6 @@ interface TaskState {
     completed: number;
     pending: number;
 }
-
 
 
 export const tasksReducer = (state: TaskState, action: TaskAction): TaskState => {
