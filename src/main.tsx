@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 // import { HooksApp } from './HooksApp'
 import './index.css'
@@ -7,8 +7,9 @@ import { Toaster } from 'sonner'
 // import { MemoHook } from './06-memos/MemoHook'
 // import { Contador } from './05-useReducer/Contador'
 // import { MemoCounter } from './06-memos/MemoCounter'
-import { InstagromApp } from './07-useOptimistic/InstagromApp'
+// import { InstagromApp } from './07-useOptimistic/InstagromApp'
 import { ClientInformation } from './08-use-suspense/ClientInformation'
+import { getUserAction } from './08-use-suspense/api/get-user.action'
 // import { TasksApp } from './05-useReducer/TaskApp'
 // import { FocusScreen } from './04-useRef/FocusScreen'
 // import { TrafficLightWithHook } from './02-useEffect/TrafficLightWithHook'
@@ -30,6 +31,12 @@ createRoot(document.getElementById('root')!).render(
     {/* <MemoHook /> */}
     {/* <MemoCounter /> */}
     {/* <InstagromApp /> */}
-    <ClientInformation id={100} />
+    <Suspense fallback={(
+      <div className='bg-gradient flex flex-col'>
+        <h1 className='text-2xl'>Cargando</h1>
+      </div>
+    )}>
+      <ClientInformation getUser={getUserAction(1002)} />
+    </Suspense>
   </StrictMode>,
 )
