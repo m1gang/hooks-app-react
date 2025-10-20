@@ -8,6 +8,7 @@ import { Toaster } from 'sonner'
 // import { Contador } from './05-useReducer/Contador'
 // import { MemoCounter } from './06-memos/MemoCounter'
 import { InstagromApp } from './07-useOptimistic/InstagromApp'
+import { ClientInformation } from './08-use-suspense/ClientInformation'
 // import { TasksApp } from './05-useReducer/TaskApp'
 // import { FocusScreen } from './04-useRef/FocusScreen'
 // import { TrafficLightWithHook } from './02-useEffect/TrafficLightWithHook'
@@ -28,6 +29,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <ScrambleWords /> */}
     {/* <MemoHook /> */}
     {/* <MemoCounter /> */}
-    <InstagromApp />
+    {/* <InstagromApp /> */}
+    <ClientInformation id={100} />
   </StrictMode>,
 )
