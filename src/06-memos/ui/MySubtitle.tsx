@@ -2,9 +2,10 @@ import { memo } from "react";
 
 interface Props {
     subtitle: string;
+    callMyAPI: () => void;
 }
 
-export const MySubtitle = memo(({ subtitle }: Props) => {
+export const MySubtitle = memo(({ subtitle, callMyAPI }: Props) => {
     console.log('mi sbutitle re-render');
     console.log('tarea superpesada');
 
@@ -12,7 +13,9 @@ export const MySubtitle = memo(({ subtitle }: Props) => {
     return (
         <>
             <div className="text-2xl font-bold">{subtitle}</div>
-            <button className="bg-indigo-500 text-white px-2 py-1 rounded-md cursor-pointer">Llamar a función</button>
+            <button className="bg-indigo-500 text-white px-2 py-1 rounded-md cursor-pointer"
+                onClick={callMyAPI}
+            >Llamar a función</button>
         </>
 
     )
