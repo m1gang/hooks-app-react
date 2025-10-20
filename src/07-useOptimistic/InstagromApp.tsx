@@ -1,5 +1,5 @@
-import { resolve } from 'path';
-import { useOptimistic, useState } from 'react';
+
+import { useOptimistic, useState, useTransition } from 'react';
 
 interface Comment {
     id: number;
@@ -7,7 +7,12 @@ interface Comment {
     optimistic?: boolean;
 }
 
+let lastId = 2;
+
 export const InstagromApp = () => {
+
+    const [isPending, startTransition] = useTransition();
+
     const [comments, setComments] = useState<Comment[]>([
         { id: 1, text: '¡Gran foto!' },
         { id: 2, text: 'Me encanta 🧡' },
@@ -15,8 +20,9 @@ export const InstagromApp = () => {
 
     const [optimisticComments, addOptimisticComments] = useOptimistic(comments,
         (currentComments, newCommentText: string) => {
+            lastId++
             return [...currentComments, {
-                id: new Date().getTime(),
+                id: lastId,
                 text: newCommentText,
                 optimistic: true,
             }]
@@ -27,14 +33,18 @@ export const InstagromApp = () => {
 
         addOptimisticComments(messageText);
 
-        //simular la petición
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        console.log('Mensaje grabado');
+        startTransition(async () => {
+            //simular la petición
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            console.log('Mensaje grabado');
 
-        setComments(prev => [...prev, {
-            id: new Date().getTime(),
-            text: messageText,
-        }])
+            setComments(prev => [...prev, {
+                id: new Date().getTime(),
+                text: messageText,
+            }])
+
+        })
+
 
     };
 
@@ -81,7 +91,7 @@ export const InstagromApp = () => {
                 />
                 <button
                     type="submit"
-                    disabled={false}
+                    disabled={isPending}
                     className="bg-blue-500 text-white p-2 rounded-md w-full"
                 >
                     Enviar
