@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { useState } from 'react';
+import { useOptimistic, useState } from 'react';
 
 interface Comment {
     id: number;
@@ -13,10 +13,21 @@ export const InstagromApp = () => {
         { id: 2, text: 'Me encanta 🧡' },
     ]);
 
+    const [optimisticComments, addOptimisticComments] = useOptimistic(comments,
+        (currentComments, newCommentText: string) => {
+            return [...currentComments, {
+                id: new Date().getTime(),
+                text: newCommentText,
+                optimistic: true,
+            }]
+        })
+
     const handleAddComment = async (formdata: FormData) => {
         const messageText = formdata.get('post-message') as string;
-        console.log('Nuevo comentario', messageText);
 
+        addOptimisticComments(messageText);
+
+        //simular la petición
         await new Promise(resolve => setTimeout(resolve, 3000));
         console.log('Mensaje grabado');
 
@@ -43,7 +54,7 @@ export const InstagromApp = () => {
 
             {/* Comentarios */}
             <ul className="flex flex-col items-start justify-center bg-gray-300 w-[500px] p-4">
-                {comments.map((comment) => (
+                {optimisticComments.map((comment) => (
                     <li key={comment.id} className="flex items-center gap-2 mb-2">
                         <div className="bg-blue-500 rounded-full w-10 h-10 flex items-center justify-center">
                             <span className="text-white text-center">A</span>
