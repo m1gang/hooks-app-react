@@ -6,6 +6,7 @@ import './index.css'
 // import { MemoHook } from './06-memos/MemoHook'
 // import { Contador } from './05-useReducer/Contador'
 import { MemoCounter } from './06-memos/MemoCounter'
+import { InstagromApp } from './07-useOptimistic/InstagromApp'
 // import { TasksApp } from './05-useReducer/TaskApp'
 // import { FocusScreen } from './04-useRef/FocusScreen'
 // import { TrafficLightWithHook } from './02-useEffect/TrafficLightWithHook'
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <TasksApp /> */}
     {/* <ScrambleWords /> */}
     {/* <MemoHook /> */}
-    <MemoCounter />
+    {/* <MemoCounter /> */}
+    <InstagromApp />
   </StrictMode>,
 )

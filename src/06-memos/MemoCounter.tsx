@@ -12,8 +12,8 @@ const heavyStuff = (iterationNumber: number) => {
 
 export const MemoCounter = () => {
 
-    const { counter, increment } = useCounter(10);
-    const { counter: counter2, increment: increment2 } = useCounter(10);
+    const { counter, increment } = useCounter(10000);
+    const { counter: counter2, increment: increment2 } = useCounter(10000);
     const myHeavyValue = useMemo(() => heavyStuff(counter), [counter]);
 
     return (
