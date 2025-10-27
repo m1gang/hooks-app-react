@@ -1,7 +1,7 @@
 import { UserContext } from "@/09-useContext/context/UserContext"
 import { Button } from "@/components/ui/button"
 import { use } from "react"
-import { useNavigate } from "react-router";
+
 
 export const ProfilePage = () => {
     const { user, logout } = use(UserContext);

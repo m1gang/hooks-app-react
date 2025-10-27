@@ -50,7 +50,7 @@ export const UserContextProvider = ({ children }: PropsWithChildren) => {
         if (storeUserId) {
             handleLogin(+storeUserId);
         }
-
+        handleLogout();
     }, [])
 
 
